@@ -1,4 +1,4 @@
-package com.sverbusoft.genesis_test.data.features.repos.datasource
+package com.sverbusoft.genesis_test.data.features.repos.datasource.remote
 
 import com.sverbusoft.genesis_test.data.features.repos.api.ReposApi
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem

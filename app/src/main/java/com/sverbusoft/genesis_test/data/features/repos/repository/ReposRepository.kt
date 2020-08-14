@@ -1,8 +1,13 @@
 package com.sverbusoft.genesis_test.data.features.repos.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.sverbusoft.genesis_test.data.features.repos.api.MockedReposApi
 import com.sverbusoft.genesis_test.data.features.repos.api.ReposApi
-import com.sverbusoft.genesis_test.data.features.repos.datasource.ReposRemoteDataSource
+import com.sverbusoft.genesis_test.data.features.repos.datasource.paging.ReposPageDataSource
+import com.sverbusoft.genesis_test.data.features.repos.datasource.paging.ReposPageDataSourceFactory
+import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
 import com.sverbusoft.genesis_test.data.network.core.ApiConfig
 import com.sverbusoft.genesis_test.data.network.core.OkHttpFactory
@@ -10,9 +15,9 @@ import com.sverbusoft.genesis_test.data.network.core.RetrofitFactory
 import io.reactivex.Single
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-
 class ReposRepository {
-    private lateinit var remoteDataSource: ReposRemoteDataSource;
+    private var remoteDataSource: ReposRemoteDataSource;
+    private lateinit var dataSourceFactory: ReposPageDataSourceFactory;
 
     init {
         val api = when(ApiConfig.USE_MOCKED_REPOS_API){
@@ -24,9 +29,20 @@ class ReposRepository {
             ).create(ReposApi::class.java);
             else -> MockedReposApi()
         }
-        remoteDataSource = ReposRemoteDataSource(api);
+
+        remoteDataSource =
+            ReposRemoteDataSource(
+                api
+            );
+
+        dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource)
     }
 
-    fun searchRepos(name: String): Single<List<ReposResponseItem>> =
-        remoteDataSource.getUserRepos(name)
+    fun searchRepos(name: String): LiveData<PagedList<ReposResponseItem>> {
+        return LivePagedListBuilder(
+            dataSourceFactory,
+            ReposPageDataSourceFactory.pagedListConfig()
+        ).build()
+    }
 }
+
