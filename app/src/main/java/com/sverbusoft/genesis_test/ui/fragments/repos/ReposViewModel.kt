@@ -10,12 +10,15 @@ import com.sverbusoft.genesis_test.data.features.repos.repository.ReposRepositor
 class ReposViewModel : ViewModel() {
     private val reposRepository: ReposRepository = ReposRepository();
 
-    //var reposPages: LiveData<PagedList<ReposResponseItem>> = MutableLiveData();
     val reposPages by lazy {
         reposRepository.getPagedList()
     }
 
     fun searchRepos(name: String){
         reposRepository.searchRepos(name);
+    }
+
+    fun addToFavorite(item: ReposResponseItem){
+        reposRepository.addToFavorite(item)
     }
 }

@@ -18,8 +18,8 @@ class ReposPageDataSource(
         callback: LoadInitialCallback<Int, ReposResponseItem>
     ) {
         Log.d("MyTag loadInitial", "params: " + 0 + " " + params.requestedLoadSize + " ")
-        fetchData(name, 0, params.requestedLoadSize) {
-            callback.onResult(it, null, 2)
+        fetchData(name, 1, params.requestedLoadSize) {
+            callback.onResult(it, null, 3)
         }
     }
 
@@ -44,6 +44,10 @@ class ReposPageDataSource(
     }
 
     private fun fetchData(name: String, page: Int, pageSize: Int, callback: (List<ReposResponseItem>) -> Unit) {
+        if(name.isEmpty()) {
+            callback(listOf())
+            return
+        }
         var disposable = Single.concat(
             dataSource.getUserRepos(name, page, pageSize),
             dataSource.getUserRepos(name, page + 1, pageSize))

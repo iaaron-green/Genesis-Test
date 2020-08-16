@@ -22,7 +22,7 @@ import com.sverbusoft.genesis_test.databinding.FragmentReposBinding
 import com.sverbusoft.genesis_test.ui.adapter.ReposAdapter
 import kotlinx.android.synthetic.main.fragment_repos.*
 
-class ReposFragment : Fragment() {
+class ReposFragment : Fragment(), ReposAdapter.ItemClickListener {
     private lateinit var reposViewModel: ReposViewModel
     private lateinit var adapter: ReposAdapter
     private lateinit var binding: FragmentReposBinding;
@@ -35,7 +35,7 @@ class ReposFragment : Fragment() {
     ): View? {
         reposViewModel =
             ViewModelProviders.of(this).get(ReposViewModel::class.java)
-        adapter = ReposAdapter()
+        adapter = ReposAdapter(this)
         binding = FragmentReposBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -81,6 +81,10 @@ class ReposFragment : Fragment() {
             pagedList = it
             swipe_refresh_layout.isRefreshing = false;
         });
+    }
+
+    override fun onItemClick(repos: ReposResponseItem) {
+        reposViewModel.addToFavorite(repos)
     }
 
 //    override fun onItemClick(userModel: UserModel) {

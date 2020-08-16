@@ -1,4 +1,4 @@
-package com.sverbusoft.genesis_test.data.network.core
+package com.sverbusoft.genesis_test.data.core.network
 
 import okhttp3.OkHttpClient
 import retrofit2.CallAdapter

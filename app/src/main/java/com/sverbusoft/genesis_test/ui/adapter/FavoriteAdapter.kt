@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
 import com.sverbusoft.genesis_test.databinding.ItemReposBinding
 
-class ReposAdapter(private val listener: ItemClickListener) :
-    PagedListAdapter<ReposResponseItem, ReposAdapter.ViewHolder>(
+class FavoriteAdapter(/*private val listener: ItemClickListener*/) :
+    PagedListAdapter<ReposResponseItem, FavoriteAdapter.ViewHolder>(
         diffCallbak
     ) {
 
@@ -23,7 +23,7 @@ class ReposAdapter(private val listener: ItemClickListener) :
         val item = getItem(position)
         item?.let {
             holder.bind(View.OnClickListener {
-                listener.onItemClick(item)
+                //listener.onItemClick(item)
             }, item)
         }
     }
