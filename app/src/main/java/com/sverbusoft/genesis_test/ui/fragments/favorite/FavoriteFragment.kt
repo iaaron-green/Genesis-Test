@@ -6,7 +6,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,10 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sverbusoft.genesis_test.R
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
 import com.sverbusoft.genesis_test.ui.adapter.FavoriteAdapter
-import com.sverbusoft.genesis_test.ui.adapter.ReposAdapter
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : Fragment(), FavoriteAdapter.ItemClickListener {
     private lateinit var adapter: FavoriteAdapter
     private lateinit var favoriteViewModel: FavoriteViewModel
 
@@ -33,7 +31,7 @@ class FavoriteFragment : Fragment() {
         favoriteViewModel =
             ViewModelProviders.of(this).get(FavoriteViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_favorite, container, false)
-        adapter = FavoriteAdapter()
+        adapter = FavoriteAdapter(this)
 
         return root
     }
@@ -44,7 +42,7 @@ class FavoriteFragment : Fragment() {
         super.onStart()
     }
 
-    fun initUI(){
+    fun initUI() {
         recycler_view.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recycler_view.adapter = adapter
         swipe_refresh_layout.setOnRefreshListener {
@@ -73,12 +71,16 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    fun subscribeUI(){
+    fun subscribeUI() {
         favoriteViewModel.reposPages.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
             //adapter.notifyDataSetChanged()
             pagedList = it
             swipe_refresh_layout.isRefreshing = false;
         });
+    }
+
+    override fun onItemDelete(repos: ReposResponseItem) {
+        favoriteViewModel.deleteFromFavorite(repos)
     }
 }

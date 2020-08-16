@@ -11,7 +11,7 @@ class ReposModelToEntityMapper : EntityMapper<ReposEntity, ReposResponseItem> {
         }
 
     override fun mapToObject(source: ReposResponseItem): ReposEntity =
-        with(source){
+        with(source) {
             ReposEntity(id, name, full_name, url, homepage)
         }
 

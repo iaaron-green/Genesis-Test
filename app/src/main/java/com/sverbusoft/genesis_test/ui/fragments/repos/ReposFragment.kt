@@ -6,17 +6,12 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
-import com.sverbusoft.genesis_test.R
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
 import com.sverbusoft.genesis_test.databinding.FragmentReposBinding
 import com.sverbusoft.genesis_test.ui.adapter.ReposAdapter
@@ -53,7 +48,7 @@ class ReposFragment : Fragment(), ReposAdapter.ItemClickListener {
             pagedList?.dataSource?.invalidate()
         }
         et_search.apply {
-            addTextChangedListener(object :TextWatcher{
+            addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     reposViewModel.searchRepos(s.toString())
                 }

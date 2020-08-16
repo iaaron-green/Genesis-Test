@@ -7,23 +7,24 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
+import com.sverbusoft.genesis_test.databinding.ItemFavoriteBinding
 import com.sverbusoft.genesis_test.databinding.ItemReposBinding
 
-class FavoriteAdapter(/*private val listener: ItemClickListener*/) :
+class FavoriteAdapter(private val listener: ItemClickListener) :
     PagedListAdapter<ReposResponseItem, FavoriteAdapter.ViewHolder>(
         diffCallbak
     ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            ItemReposBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         item?.let {
             holder.bind(View.OnClickListener {
-                //listener.onItemClick(item)
+                listener.onItemDelete(item)
             }, item)
         }
     }
@@ -42,7 +43,7 @@ class FavoriteAdapter(/*private val listener: ItemClickListener*/) :
             }
     }
 
-    class ViewHolder(private val binding: ItemReposBinding) :
+    class ViewHolder(private val binding: ItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(listener: View.OnClickListener, item: ReposResponseItem) {
             binding.apply {
@@ -54,6 +55,6 @@ class FavoriteAdapter(/*private val listener: ItemClickListener*/) :
     }
 
     interface ItemClickListener {
-        fun onItemClick(repos: ReposResponseItem)
+        fun onItemDelete(repos: ReposResponseItem)
     }
 }
