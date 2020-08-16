@@ -29,6 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
                             AppDatabase::class.java, "github.db"
                         )
                             .allowMainThreadQueries()
+                            .setJournalMode(JournalMode.TRUNCATE)
                             .build()
                     }
                 }

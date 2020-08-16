@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ReposRepository {
     private var remoteDataSource: ReposRemoteDataSource;
-    private var localDataSource: ReposDao?;
+    private var localDataSource: ReposDao;
     private var dataSourceFactory: ReposPageDataSourceFactory;
 
     init {
@@ -39,9 +39,9 @@ class ReposRepository {
                 api
             );
 
-        localDataSource = AppDatabase.getInstance()?.reposDao();
+        localDataSource = AppDatabase.getInstance()!!.reposDao();
 
-        dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource, "")
+        dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource, localDataSource,"")
     }
 
     fun searchRepos(name: String) {

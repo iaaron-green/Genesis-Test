@@ -2,15 +2,18 @@ package com.sverbusoft.genesis_test.data.features.repos.datasource.paging
 
 import android.util.Log
 import androidx.paging.PageKeyedDataSource
+import com.sverbusoft.genesis_test.data.features.repos.datasource.local.ReposDao
 import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
 import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposDtoToDomainMapper
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 class ReposPageDataSource(
-    private val dataSource: ReposRemoteDataSource,
+    private val remoteDataSource: ReposRemoteDataSource,
+    private val localDataSource: ReposDao,
     var name: String
 ) : PageKeyedDataSource<Int, ReposModel>() {
     override fun loadInitial(
@@ -54,13 +57,22 @@ class ReposPageDataSource(
             return
         }
         var disposable = Single.concat(
-            dataSource.getRepos(name, page, pageSize),
-            dataSource.getRepos(name, page + 1, pageSize)
+            remoteDataSource.getRepos(name, page, pageSize),
+            remoteDataSource.getRepos(name, page + 1, pageSize)
         )
             .map { ReposDtoToDomainMapper().mapFromObjects(it) }
+            .map { t ->
+                    t.forEach { s: ReposModel ->
+                        run {
+                            if (localDataSource.getFavoriteRepos(s.id) != null) s.favorite = true
+                        }
+                    }
+                    return@map t
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+
                 callback(it)
             }, {
                 it.printStackTrace()

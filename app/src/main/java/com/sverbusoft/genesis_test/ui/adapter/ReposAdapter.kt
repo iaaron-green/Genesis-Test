@@ -3,6 +3,7 @@ package com.sverbusoft.genesis_test.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -51,6 +52,10 @@ class ReposAdapter(private val listener: ItemClickListener) :
                 model = item
                 //Picasso.get().load(item.avatarUrl).into(ciUserPhoto)
             }
+                binding.ivFavorite.isChecked = item.favorite;
+                binding.ivFavorite.setOnCheckedChangeListener { buttonView, isChecked ->
+                    if(isChecked) buttonView.isEnabled = false
+                }
         }
     }
 
