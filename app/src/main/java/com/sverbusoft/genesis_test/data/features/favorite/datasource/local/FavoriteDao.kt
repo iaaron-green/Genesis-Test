@@ -9,7 +9,7 @@ import com.sverbusoft.genesis_test.data.features.repos.entity.ReposEntity
 @Dao
 interface FavoriteDao: BaseDao<ReposEntity> {
 
-    @Query("SELECT * FROM ReposEntity WHERE name LIKE :name LIMIT :end OFFSET :start")
+    @Query("SELECT * FROM ReposEntity WHERE name LIKE :name ORDER BY name LIMIT :end OFFSET :start")
     fun getFavoriteRepos(start: Int, end: Int, name : String) : List<ReposEntity>
 
 //    @Query("SELECT * FROM ReposEntity")

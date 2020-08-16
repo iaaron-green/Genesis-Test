@@ -50,32 +50,33 @@ class FavoriteFragment : Fragment() {
         swipe_refresh_layout.setOnRefreshListener {
             pagedList?.dataSource?.invalidate()
         }
-//        et_search.apply {
-//            addTextChangedListener(object : TextWatcher {
-//                override fun afterTextChanged(s: Editable?) {
-//                    favoriteViewModel.searchRepos(s.toString())
-//                }
-//
-//                override fun beforeTextChanged(
-//                    s: CharSequence?,
-//                    start: Int,
-//                    count: Int,
-//                    after: Int
-//                ) {
-//
-//                }
-//
-//                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//
-//                }
-//
-//            })
-//        }
+        et_search.apply {
+            addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    favoriteViewModel.searchRepos(s.toString())
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+
+            })
+        }
     }
 
     fun subscribeUI(){
         favoriteViewModel.reposPages.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
+            //adapter.notifyDataSetChanged()
             pagedList = it
             swipe_refresh_layout.isRefreshing = false;
         });

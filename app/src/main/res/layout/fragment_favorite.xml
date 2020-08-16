@@ -6,10 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.favorite.FavoriteFragment">
 
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_search">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

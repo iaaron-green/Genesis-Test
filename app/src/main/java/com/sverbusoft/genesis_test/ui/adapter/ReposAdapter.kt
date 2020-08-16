@@ -32,11 +32,11 @@ class ReposAdapter(private val listener: ItemClickListener) :
         var diffCallbak: DiffUtil.ItemCallback<ReposResponseItem> =
             object : DiffUtil.ItemCallback<ReposResponseItem>() {
                 override fun areItemsTheSame(oldItem: ReposResponseItem, newItem: ReposResponseItem): Boolean {
-                    return true;
+                    return oldItem.id == newItem.id;
                 }
 
                 override fun areContentsTheSame(oldItem: ReposResponseItem, newItem: ReposResponseItem): Boolean {
-                    return true;
+                    return oldItem.name == newItem.name  && oldItem.url == newItem.url;
                 }
 
             }

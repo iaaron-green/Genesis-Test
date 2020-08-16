@@ -78,6 +78,7 @@ class ReposFragment : Fragment(), ReposAdapter.ItemClickListener {
     private fun subscribeUI() {
         reposViewModel.reposPages.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
+            //adapter.notifyDataSetChanged()
             pagedList = it
             swipe_refresh_layout.isRefreshing = false;
         });
