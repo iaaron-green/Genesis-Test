@@ -1,6 +1,8 @@
 package com.sverbusoft.genesis_test.ui.fragments.repos
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,8 +49,29 @@ class ReposFragment : Fragment() {
     private fun initUI() {
         recycler_view.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recycler_view.adapter = adapter
-        binding.swipeRefreshLayout.setOnRefreshListener {
+        swipe_refresh_layout.setOnRefreshListener {
             pagedList?.dataSource?.invalidate()
+        }
+        et_search.apply {
+            addTextChangedListener(object :TextWatcher{
+                override fun afterTextChanged(s: Editable?) {
+                    reposViewModel.searchRepos(s.toString())
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+
+            })
         }
     }
 
@@ -56,7 +79,7 @@ class ReposFragment : Fragment() {
         reposViewModel.reposPages.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
             pagedList = it
-            binding.swipeRefreshLayout.isRefreshing = false;
+            swipe_refresh_layout.isRefreshing = false;
         });
     }
 

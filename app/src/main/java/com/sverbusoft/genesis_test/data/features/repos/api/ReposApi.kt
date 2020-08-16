@@ -7,5 +7,9 @@ import retrofit2.http.Query
 
 interface ReposApi {
     @POST("/search/repositories")
-    fun search(@Query("q") q: String): Single<List<ReposResponseItem>>
+    fun search(
+        @Query("q") q: String,
+        @Query("page") page: Int,
+        @Query("per_page") per_page: Int
+    ): Single<List<ReposResponseItem>>
 }

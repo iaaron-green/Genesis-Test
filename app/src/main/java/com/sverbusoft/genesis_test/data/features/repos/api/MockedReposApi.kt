@@ -5,7 +5,7 @@ import io.reactivex.Single
 import io.reactivex.internal.operators.single.SingleJust
 
 class MockedReposApi : ReposApi {
-    override fun search(q: String): Single<List<ReposResponseItem>> = SingleJust<List<ReposResponseItem>>(
+    override fun search(q: String, page: Int, per_page: Int): Single<List<ReposResponseItem>> = SingleJust<List<ReposResponseItem>>(
         listOf(ReposResponseItem(
             "ded/qwery",
             "",

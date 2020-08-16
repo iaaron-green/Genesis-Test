@@ -1,5 +1,6 @@
 package com.sverbusoft.genesis_test.data.features.repos.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -17,7 +18,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 class ReposRepository {
     private var remoteDataSource: ReposRemoteDataSource;
-    private lateinit var dataSourceFactory: ReposPageDataSourceFactory;
+    private var dataSourceFactory: ReposPageDataSourceFactory;
 
     init {
         val api = when(ApiConfig.USE_MOCKED_REPOS_API){
@@ -35,10 +36,16 @@ class ReposRepository {
                 api
             );
 
-        dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource)
+        dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource, "")
     }
 
-    fun searchRepos(name: String): LiveData<PagedList<ReposResponseItem>> {
+    fun searchRepos(name: String) {
+        Log.d("MyTag searchRepos", "name: $name")
+        dataSourceFactory.name = name
+        dataSourceFactory.refresh()
+    }
+
+    fun getPagedList(): LiveData<PagedList<ReposResponseItem>>{
         return LivePagedListBuilder(
             dataSourceFactory,
             ReposPageDataSourceFactory.pagedListConfig()

@@ -5,6 +5,6 @@ import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
 import io.reactivex.Single
 
 class ReposRemoteDataSource constructor(private val api: ReposApi){
-    fun getUserRepos(name: String): Single<List<ReposResponseItem>> =
-        api.search(name)
+    fun getUserRepos(name: String, page: Int, per_page: Int): Single<List<ReposResponseItem>> =
+        api.search(name, page, per_page)
 }
