@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
+import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 import com.sverbusoft.genesis_test.databinding.ItemFavoriteBinding
-import com.sverbusoft.genesis_test.databinding.ItemReposBinding
 
 class FavoriteAdapter(private val listener: ItemClickListener) :
-    PagedListAdapter<ReposResponseItem, FavoriteAdapter.ViewHolder>(
+    PagedListAdapter<ReposModel, FavoriteAdapter.ViewHolder>(
         diffCallbak
     ) {
 
@@ -30,13 +29,13 @@ class FavoriteAdapter(private val listener: ItemClickListener) :
     }
 
     companion object {
-        var diffCallbak: DiffUtil.ItemCallback<ReposResponseItem> =
-            object : DiffUtil.ItemCallback<ReposResponseItem>() {
-                override fun areItemsTheSame(oldItem: ReposResponseItem, newItem: ReposResponseItem): Boolean {
+        var diffCallbak: DiffUtil.ItemCallback<ReposModel> =
+            object : DiffUtil.ItemCallback<ReposModel>() {
+                override fun areItemsTheSame(oldItem: ReposModel, newItem: ReposModel): Boolean {
                     return oldItem.id == newItem.id;
                 }
 
-                override fun areContentsTheSame(oldItem: ReposResponseItem, newItem: ReposResponseItem): Boolean {
+                override fun areContentsTheSame(oldItem: ReposModel, newItem: ReposModel): Boolean {
                     return oldItem.name == newItem.name && oldItem.url == newItem.url;
                 }
 
@@ -45,7 +44,7 @@ class FavoriteAdapter(private val listener: ItemClickListener) :
 
     class ViewHolder(private val binding: ItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(listener: View.OnClickListener, item: ReposResponseItem) {
+        fun bind(listener: View.OnClickListener, item: ReposModel) {
             binding.apply {
                 clickListener = listener
                 model = item
@@ -55,6 +54,6 @@ class FavoriteAdapter(private val listener: ItemClickListener) :
     }
 
     interface ItemClickListener {
-        fun onItemDelete(repos: ReposResponseItem)
+        fun onItemDelete(repos: ReposModel)
     }
 }

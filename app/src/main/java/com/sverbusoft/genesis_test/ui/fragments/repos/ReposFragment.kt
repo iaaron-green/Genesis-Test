@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
+import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 import com.sverbusoft.genesis_test.databinding.FragmentReposBinding
 import com.sverbusoft.genesis_test.ui.adapter.ReposAdapter
 import kotlinx.android.synthetic.main.fragment_repos.*
@@ -21,7 +21,7 @@ class ReposFragment : Fragment(), ReposAdapter.ItemClickListener {
     private lateinit var reposViewModel: ReposViewModel
     private lateinit var adapter: ReposAdapter
     private lateinit var binding: FragmentReposBinding;
-    private var pagedList: PagedList<ReposResponseItem>? = null
+    private var pagedList: PagedList<ReposModel>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,7 +79,7 @@ class ReposFragment : Fragment(), ReposAdapter.ItemClickListener {
         });
     }
 
-    override fun onItemClick(repos: ReposResponseItem) {
+    override fun onItemClick(repos: ReposModel) {
         reposViewModel.addToFavorite(repos)
     }
 

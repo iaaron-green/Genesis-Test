@@ -9,11 +9,10 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="model"
-            type="com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem"/>
+            type="com.sverbusoft.genesis_test.data.features.repos.model.ReposModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:onClick="@{clickListener}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -45,6 +44,7 @@
 
         <ImageView
             android:id="@+id/iv_delete"
+            android:onClick="@{clickListener}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_delete"

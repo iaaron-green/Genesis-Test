@@ -14,7 +14,7 @@ import com.sverbusoft.genesis_test.data.features.repos.datasource.local.ReposDao
 import com.sverbusoft.genesis_test.data.features.repos.datasource.paging.ReposPageDataSourceFactory
 import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
 import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposModelToEntityMapper
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
+import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -50,14 +50,14 @@ class ReposRepository {
         dataSourceFactory.refresh()
     }
 
-    fun getPagedList(): LiveData<PagedList<ReposResponseItem>> {
+    fun getPagedList(): LiveData<PagedList<ReposModel>> {
         return LivePagedListBuilder(
             dataSourceFactory,
             ReposPageDataSourceFactory.pagedListConfig()
         ).build()
     }
 
-    fun addToFavorite(item: ReposResponseItem) =
+    fun addToFavorite(item: ReposModel) =
         localDataSource?.insert(ReposModelToEntityMapper().mapToObject(item))
 
 

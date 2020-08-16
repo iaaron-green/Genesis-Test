@@ -13,7 +13,7 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sverbusoft.genesis_test.R
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
+import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 import com.sverbusoft.genesis_test.ui.adapter.FavoriteAdapter
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
@@ -21,7 +21,7 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.ItemClickListener {
     private lateinit var adapter: FavoriteAdapter
     private lateinit var favoriteViewModel: FavoriteViewModel
 
-    private var pagedList: PagedList<ReposResponseItem>? = null
+    private var pagedList: PagedList<ReposModel>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,7 +80,7 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.ItemClickListener {
         });
     }
 
-    override fun onItemDelete(repos: ReposResponseItem) {
+    override fun onItemDelete(repos: ReposModel) {
         favoriteViewModel.deleteFromFavorite(repos)
     }
 }

@@ -4,16 +4,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PagedList
 import com.sverbusoft.genesis_test.data.features.favorite.datasource.local.FavoriteDao
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
+import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 
 class FavoritePageDataSourceFactory(
     private val dataSource: FavoriteDao,
     internal var name: String
-) : DataSource.Factory<Int, ReposResponseItem>() {
+) : DataSource.Factory<Int, ReposModel>() {
 
     val usersDataSourceLiveData = MutableLiveData<FavoritePageDataSource>()
 
-    override fun create(): DataSource<Int, ReposResponseItem> {
+    override fun create(): DataSource<Int, ReposModel> {
         val source = FavoritePageDataSource(dataSource, name)
         usersDataSourceLiveData.postValue(source)
         return source;

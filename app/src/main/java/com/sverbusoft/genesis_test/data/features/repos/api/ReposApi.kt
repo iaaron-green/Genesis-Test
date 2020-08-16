@@ -1,7 +1,6 @@
 package com.sverbusoft.genesis_test.data.features.repos.api
 
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResult
+import com.sverbusoft.genesis_test.data.features.repos.dto.ReposResult
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

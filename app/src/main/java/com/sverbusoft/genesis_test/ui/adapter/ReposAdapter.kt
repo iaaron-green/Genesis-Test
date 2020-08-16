@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
+import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 import com.sverbusoft.genesis_test.databinding.ItemReposBinding
 
 class ReposAdapter(private val listener: ItemClickListener) :
-    PagedListAdapter<ReposResponseItem, ReposAdapter.ViewHolder>(
+    PagedListAdapter<ReposModel, ReposAdapter.ViewHolder>(
         diffCallbak
     ) {
 
@@ -29,14 +29,14 @@ class ReposAdapter(private val listener: ItemClickListener) :
     }
 
     companion object {
-        var diffCallbak: DiffUtil.ItemCallback<ReposResponseItem> =
-            object : DiffUtil.ItemCallback<ReposResponseItem>() {
-                override fun areItemsTheSame(oldItem: ReposResponseItem, newItem: ReposResponseItem): Boolean {
+        var diffCallbak: DiffUtil.ItemCallback<ReposModel> =
+            object : DiffUtil.ItemCallback<ReposModel>() {
+                override fun areItemsTheSame(oldItem: ReposModel, newItem: ReposModel): Boolean {
                     return oldItem.id == newItem.id;
                 }
 
-                override fun areContentsTheSame(oldItem: ReposResponseItem, newItem: ReposResponseItem): Boolean {
-                    return oldItem.name == newItem.name  && oldItem.url == newItem.url;
+                override fun areContentsTheSame(oldItem: ReposModel, newItem: ReposModel): Boolean {
+                    return oldItem.name == newItem.name && oldItem.url == newItem.url;
                 }
 
             }
@@ -44,7 +44,8 @@ class ReposAdapter(private val listener: ItemClickListener) :
 
     class ViewHolder(private val binding: ItemReposBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(listener: View.OnClickListener, item: ReposResponseItem) {
+
+        fun bind(listener: View.OnClickListener, item: ReposModel) {
             binding.apply {
                 clickListener = listener
                 model = item
@@ -54,6 +55,6 @@ class ReposAdapter(private val listener: ItemClickListener) :
     }
 
     interface ItemClickListener {
-        fun onItemClick(repos: ReposResponseItem)
+        fun onItemClick(repos: ReposModel)
     }
 }

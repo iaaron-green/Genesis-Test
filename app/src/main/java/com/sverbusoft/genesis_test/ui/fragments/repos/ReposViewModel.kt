@@ -1,7 +1,7 @@
 package com.sverbusoft.genesis_test.ui.fragments.repos
 
 import androidx.lifecycle.ViewModel
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposResponseItem
+import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 import com.sverbusoft.genesis_test.data.features.repos.repository.ReposRepository
 
 class ReposViewModel : ViewModel() {
@@ -15,7 +15,7 @@ class ReposViewModel : ViewModel() {
         reposRepository.searchRepos(name);
     }
 
-    fun addToFavorite(item: ReposResponseItem) {
+    fun addToFavorite(item: ReposModel) {
         reposRepository.addToFavorite(item)
     }
 }

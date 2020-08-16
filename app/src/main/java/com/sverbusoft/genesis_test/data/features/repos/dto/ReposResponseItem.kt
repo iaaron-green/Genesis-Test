@@ -1,4 +1,4 @@
-package com.sverbusoft.genesis_test.data.features.repos.model
+package com.sverbusoft.genesis_test.data.features.repos.dto
 
 data class ReposResponseItem(
     val full_name: String,
