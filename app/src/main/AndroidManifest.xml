@@ -16,8 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.NavigationActivity"
-            android:label="@string/title_activity_navigation">
+            android:name=".ui.activity.NavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
