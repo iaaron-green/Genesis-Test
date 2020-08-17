@@ -1,8 +1,9 @@
 package com.sverbusoft.genesis_test.ui.fragments.repos
 
 import androidx.lifecycle.ViewModel
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
-import com.sverbusoft.genesis_test.data.features.repos.repository.ReposRepository
+import com.sverbusoft.genesis_test.data.features.repos.repository.ReposRepositoryImpl
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.repository.ReposRepository
 import io.reactivex.disposables.CompositeDisposable
 
 class ReposViewModel : ViewModel() {
@@ -10,7 +11,7 @@ class ReposViewModel : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        reposRepository = ReposRepository(compositeDisposable);
+        reposRepository = ReposRepositoryImpl(compositeDisposable);
     }
 
     val reposPages by lazy {

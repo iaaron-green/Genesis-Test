@@ -3,11 +3,10 @@ package com.sverbusoft.genesis_test.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
 import com.sverbusoft.genesis_test.databinding.ItemReposBinding
 
 class ReposAdapter(private val listener: ItemClickListener) :

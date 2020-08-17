@@ -13,7 +13,7 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sverbusoft.genesis_test.R
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
 import com.sverbusoft.genesis_test.ui.adapter.FavoriteAdapter
 import kotlinx.android.synthetic.main.fragment_favorite.*
 

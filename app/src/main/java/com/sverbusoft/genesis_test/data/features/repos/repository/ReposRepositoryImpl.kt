@@ -14,12 +14,13 @@ import com.sverbusoft.genesis_test.data.features.repos.datasource.local.ReposDao
 import com.sverbusoft.genesis_test.data.features.repos.datasource.paging.ReposPageDataSourceFactory
 import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
 import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposModelToEntityMapper
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.repository.ReposRepository
 import io.reactivex.disposables.CompositeDisposable
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ReposRepository(private val compositeDisposable: CompositeDisposable) {
+class ReposRepositoryImpl(private val compositeDisposable: CompositeDisposable): ReposRepository {
     private var remoteDataSource: ReposRemoteDataSource
     private var localDataSource: ReposDao
     private var dataSourceFactory: ReposPageDataSourceFactory
@@ -45,20 +46,20 @@ class ReposRepository(private val compositeDisposable: CompositeDisposable) {
         dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource, localDataSource,"", compositeDisposable)
     }
 
-    fun searchRepos(name: String) {
+    override fun searchRepos(name: String) {
         Log.d("MyTag searchRepos", "name: $name")
         dataSourceFactory.name = name
         dataSourceFactory.refresh()
     }
 
-    fun getPagedList(): LiveData<PagedList<ReposModel>> {
+    override fun getPagedList(): LiveData<PagedList<ReposModel>> {
         return LivePagedListBuilder(
             dataSourceFactory,
             ReposPageDataSourceFactory.pagedListConfig()
         ).build()
     }
 
-    fun addToFavorite(item: ReposModel) =
+    override fun addToFavorite(item: ReposModel) =
         localDataSource.insert(ReposModelToEntityMapper().mapToObject(item))
 
 

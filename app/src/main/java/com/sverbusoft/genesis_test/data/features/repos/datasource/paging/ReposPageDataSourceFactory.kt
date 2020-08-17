@@ -5,7 +5,7 @@ import androidx.paging.DataSource
 import androidx.paging.PagedList
 import com.sverbusoft.genesis_test.data.features.repos.datasource.local.ReposDao
 import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
 import io.reactivex.disposables.CompositeDisposable
 
 class ReposPageDataSourceFactory(

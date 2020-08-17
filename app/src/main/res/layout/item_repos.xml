@@ -9,7 +9,7 @@
                     type="android.view.View.OnClickListener"/>
                 <variable
                     name="model"
-                    type="com.sverbusoft.genesis_test.data.features.repos.model.ReposModel"/>
+                    type="com.sverbusoft.genesis_test.domain.repos.model.ReposModel"/>
         </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

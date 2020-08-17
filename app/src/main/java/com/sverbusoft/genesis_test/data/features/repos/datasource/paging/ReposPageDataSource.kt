@@ -5,7 +5,7 @@ import androidx.paging.PageKeyedDataSource
 import com.sverbusoft.genesis_test.data.features.repos.datasource.local.ReposDao
 import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
 import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposDtoToDomainMapper
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

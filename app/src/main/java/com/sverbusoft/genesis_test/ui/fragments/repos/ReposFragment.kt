@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
 import com.sverbusoft.genesis_test.databinding.FragmentReposBinding
 import com.sverbusoft.genesis_test.ui.adapter.ReposAdapter
 import kotlinx.android.synthetic.main.fragment_repos.*

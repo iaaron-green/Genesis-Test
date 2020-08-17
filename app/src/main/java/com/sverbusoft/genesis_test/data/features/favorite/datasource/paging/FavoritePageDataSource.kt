@@ -4,7 +4,7 @@ import androidx.paging.PositionalDataSource
 import com.sverbusoft.genesis_test.data.features.favorite.datasource.local.FavoriteDao
 import com.sverbusoft.genesis_test.data.features.repos.dto.ReposResponseItem
 import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposModelToEntityMapper
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
 
 class FavoritePageDataSource(
     private val dataSource: FavoriteDao,

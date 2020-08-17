@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PagedList
 import com.sverbusoft.genesis_test.data.features.favorite.datasource.local.FavoriteDao
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
 
 class FavoritePageDataSourceFactory(
     private val dataSource: FavoriteDao,

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
 import com.sverbusoft.genesis_test.databinding.ItemFavoriteBinding
 
 class FavoriteAdapter(private val listener: ItemClickListener) :

@@ -8,9 +8,10 @@ import com.sverbusoft.genesis_test.data.core.db.AppDatabase
 import com.sverbusoft.genesis_test.data.features.favorite.datasource.local.FavoriteDao
 import com.sverbusoft.genesis_test.data.features.favorite.datasource.paging.FavoritePageDataSourceFactory
 import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposModelToEntityMapper
-import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
+import com.sverbusoft.genesis_test.domain.favorite.repository.FavoriteRepository
 
-class FavoriteRepository {
+class FavoriteRepositoryImpl: FavoriteRepository {
     private var localDataSource: FavoriteDao = AppDatabase.getInstance()!!.favoriteDao()
     private var dataSourceFactory: FavoritePageDataSourceFactory
 
@@ -18,18 +19,18 @@ class FavoriteRepository {
         dataSourceFactory = FavoritePageDataSourceFactory(localDataSource, "")
     }
 
-    fun searchRepos(name: String) {
+    override fun searchRepos(name: String) {
         Log.d("MyTag searchRepos", "name: $name")
         dataSourceFactory.name = name
         dataSourceFactory.refresh()
     }
 
-    fun deleteRepos(item: ReposModel) {
+    override fun deleteRepos(item: ReposModel) {
         localDataSource.delete(ReposModelToEntityMapper().mapToObject(item))
         dataSourceFactory.refresh()
     }
 
-    fun getPagedList(): LiveData<PagedList<ReposModel>> {
+    override fun getPagedList(): LiveData<PagedList<ReposModel>> {
         return LivePagedListBuilder(
             dataSourceFactory,
             FavoritePageDataSourceFactory.pagedListConfig()

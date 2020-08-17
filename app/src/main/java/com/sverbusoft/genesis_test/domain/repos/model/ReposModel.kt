@@ -1,4 +1,4 @@
-package com.sverbusoft.genesis_test.data.features.repos.model
+package com.sverbusoft.genesis_test.domain.repos.model
 
 data class ReposModel (
     val id: Int,
