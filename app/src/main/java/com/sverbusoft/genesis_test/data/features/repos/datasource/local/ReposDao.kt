@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.sverbusoft.genesis_test.data.core.db.BaseDao
 import com.sverbusoft.genesis_test.data.features.repos.entity.ReposEntity
-import io.reactivex.Single
 
 @Dao
 interface ReposDao:

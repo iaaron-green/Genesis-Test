@@ -18,7 +18,7 @@ class ReposPageDataSourceFactory(
     override fun create(): DataSource<Int, ReposModel> {
         val source = ReposPageDataSource(remoteDataSource, localDataSource, name)
         usersDataSourceLiveData.postValue(source)
-        return source;
+        return source
     }
 
     companion object {

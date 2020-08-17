@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_repos.*
 class ReposFragment : Fragment(), ReposAdapter.ItemClickListener {
     private lateinit var reposViewModel: ReposViewModel
     private lateinit var adapter: ReposAdapter
-    private lateinit var binding: FragmentReposBinding;
+    private lateinit var binding: FragmentReposBinding
     private var pagedList: PagedList<ReposModel>? = null
 
     override fun onCreateView(

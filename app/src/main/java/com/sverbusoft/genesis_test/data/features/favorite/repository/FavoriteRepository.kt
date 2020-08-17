@@ -11,8 +11,8 @@ import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposModelToEntity
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 
 class FavoriteRepository {
-    private var localDataSource: FavoriteDao = AppDatabase.getInstance()!!.favoriteDao();
-    private var dataSourceFactory: FavoritePageDataSourceFactory;
+    private var localDataSource: FavoriteDao = AppDatabase.getInstance()!!.favoriteDao()
+    private var dataSourceFactory: FavoritePageDataSourceFactory
 
     init {
         dataSourceFactory = FavoritePageDataSourceFactory(localDataSource, "")

@@ -19,9 +19,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ReposRepository {
-    private var remoteDataSource: ReposRemoteDataSource;
-    private var localDataSource: ReposDao;
-    private var dataSourceFactory: ReposPageDataSourceFactory;
+    private var remoteDataSource: ReposRemoteDataSource
+    private var localDataSource: ReposDao
+    private var dataSourceFactory: ReposPageDataSourceFactory
 
     init {
         val api = when (ApiConfig.USE_MOCKED_REPOS_API) {
@@ -30,16 +30,16 @@ class ReposRepository {
                 RxJava2CallAdapterFactory.create(),
                 GsonConverterFactory.create(),
                 ApiConfig.BASE_URL
-            ).create(ReposApi::class.java);
+            ).create(ReposApi::class.java)
             else -> MockedReposApi()
         }
 
         remoteDataSource =
             ReposRemoteDataSource(
                 api
-            );
+            )
 
-        localDataSource = AppDatabase.getInstance()!!.reposDao();
+        localDataSource = AppDatabase.getInstance()!!.reposDao()
 
         dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource, localDataSource,"")
     }
@@ -58,7 +58,7 @@ class ReposRepository {
     }
 
     fun addToFavorite(item: ReposModel) =
-        localDataSource?.insert(ReposModelToEntityMapper().mapToObject(item))
+        localDataSource.insert(ReposModelToEntityMapper().mapToObject(item))
 
 
 }

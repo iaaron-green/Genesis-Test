@@ -15,7 +15,7 @@ class FavoritePageDataSource(
         params: LoadRangeParams,
         callback: LoadRangeCallback<ReposModel>
     ) {
-        var result = ReposModelToEntityMapper().mapFromObjects(
+        val result = ReposModelToEntityMapper().mapFromObjects(
             dataSource.getFavoriteRepos(
                 params.startPosition,
                 params.loadSize,
@@ -29,7 +29,7 @@ class FavoritePageDataSource(
         params: LoadInitialParams,
         callback: LoadInitialCallback<ReposModel>
     ) {
-        var result = ReposModelToEntityMapper().mapFromObjects(
+        val result = ReposModelToEntityMapper().mapFromObjects(
             dataSource.getFavoriteRepos(
                 params.requestedStartPosition,
                 params.requestedLoadSize,

@@ -42,7 +42,7 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.ItemClickListener {
         super.onStart()
     }
 
-    fun initUI() {
+    private fun initUI() {
         recycler_view.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recycler_view.adapter = adapter
         swipe_refresh_layout.setOnRefreshListener {
@@ -71,13 +71,13 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.ItemClickListener {
         }
     }
 
-    fun subscribeUI() {
+    private fun subscribeUI() {
         favoriteViewModel.reposPages.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
             //adapter.notifyDataSetChanged()
             pagedList = it
-            swipe_refresh_layout.isRefreshing = false;
-        });
+            swipe_refresh_layout.isRefreshing = false
+        })
     }
 
     override fun onItemDelete(repos: ReposModel) {

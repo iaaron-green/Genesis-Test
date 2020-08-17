@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var instance: AppDatabase? = null
 
-        open fun getInstance(): AppDatabase? {
+        fun getInstance(): AppDatabase? {
             if (instance == null) {
                 synchronized(AppDatabase::class.java) {
                     if (instance == null) {

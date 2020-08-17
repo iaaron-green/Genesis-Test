@@ -32,11 +32,11 @@ class FavoriteAdapter(private val listener: ItemClickListener) :
         var diffCallbak: DiffUtil.ItemCallback<ReposModel> =
             object : DiffUtil.ItemCallback<ReposModel>() {
                 override fun areItemsTheSame(oldItem: ReposModel, newItem: ReposModel): Boolean {
-                    return oldItem.id == newItem.id;
+                    return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(oldItem: ReposModel, newItem: ReposModel): Boolean {
-                    return oldItem.name == newItem.name && oldItem.url == newItem.url;
+                    return oldItem.name == newItem.name && oldItem.url == newItem.url
                 }
 
             }
