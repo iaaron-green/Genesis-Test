@@ -27,7 +27,7 @@ class ReposRepositoryImpl(private val compositeDisposable: CompositeDisposable):
 
     init {
         val api = when (ApiConfig.USE_MOCKED_REPOS_API) {
-            true -> RetrofitFactory.create(
+            false -> RetrofitFactory.create(
                 OkHttpFactory.create(),
                 RxJava2CallAdapterFactory.create(),
                 GsonConverterFactory.create(),
