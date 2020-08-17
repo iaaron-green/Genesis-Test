@@ -9,6 +9,7 @@ data class ReposEntity (
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "full_name") val full_name: String,
+    @ColumnInfo(name = "language") val language: String,
     @ColumnInfo(name = "url") val url: String,
     @ColumnInfo(name = "homepage") val homepage: String?
 )

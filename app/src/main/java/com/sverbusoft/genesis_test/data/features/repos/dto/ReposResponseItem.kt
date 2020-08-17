@@ -5,5 +5,6 @@ data class ReposResponseItem(
     val homepage: String?,
     val id: Int,
     val name: String,
-    val url: String
+    val url: String,
+    val language: String
 )

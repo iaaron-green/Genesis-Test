@@ -11,6 +11,7 @@ class ReposDtoToDomainMapper: DtoMapper<ReposResponseItem, ReposModel> {
                 id,
                 name,
                 full_name,
+                language,
                 false,
                 url,
                 homepage

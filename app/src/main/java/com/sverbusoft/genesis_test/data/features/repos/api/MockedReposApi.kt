@@ -13,14 +13,16 @@ class MockedReposApi : ReposApi {
                 "",
                 1470094,
                 "qwery",
-                "https://api.github.com/repos/ded/qwery"
+                "https://api.github.com/repos/ded/qwery",
+                "JS"
             ),
             ReposResponseItem(
                 "ded/ewq",
                 "",
                 1470095,
                 "ewq",
-                "https://api.github.com/repos/ded/ewq"
+                "https://api.github.com/repos/ded/ewq",
+                "JS"
             )
         ), 0)
 

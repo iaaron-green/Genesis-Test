@@ -11,6 +11,7 @@ class ReposModelToEntityMapper : EntityMapper<ReposEntity, ReposModel> {
                 id,
                 name,
                 full_name,
+                language,
                 true,
                 url,
                 homepage
@@ -19,7 +20,7 @@ class ReposModelToEntityMapper : EntityMapper<ReposEntity, ReposModel> {
 
     override fun mapToObject(source: ReposModel): ReposEntity =
         with(source) {
-            ReposEntity(id, name, full_name, url, homepage)
+            ReposEntity(id, name, full_name, language, url, homepage)
         }
 
 }

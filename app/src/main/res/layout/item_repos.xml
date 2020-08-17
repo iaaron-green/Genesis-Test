@@ -14,13 +14,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_border">
 
         <TextView
             android:id="@+id/tv_repos_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.name}"
+            android:text="@{String.format(@string/repos_name, model.name)}"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:layout_marginStart="16dp"
@@ -29,24 +30,24 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_bias="0.3"
             tools:text="Name: Aaron Green" />
 
         <TextView
             android:id="@+id/tv_repos_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.url}"
-            android:textColor="@android:color/black"
+            android:text= "@{String.format(@string/repos_language, model.language)}"            android:textColor="@android:color/black"
             android:textSize="16sp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_repos_name"
-            tools:text="Url" />
+            tools:text="Language: " />
 
         <CheckBox
             android:id="@+id/iv_favorite"

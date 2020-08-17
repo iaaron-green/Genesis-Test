@@ -3,4 +3,6 @@
     <string name="title_activity_navigation">MainActivity</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_repository">Repository</string>
+    <string name="repos_name">Name: %s</string>
+    <string name="repos_language">Language: %s</string>
 </resources>
