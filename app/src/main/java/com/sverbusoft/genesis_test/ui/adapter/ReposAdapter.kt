@@ -50,11 +50,10 @@ class ReposAdapter(private val listener: ItemClickListener) :
             binding.apply {
                 clickListener = listener
                 model = item
-                //Picasso.get().load(item.avatarUrl).into(ciUserPhoto)
             }
                 binding.ivFavorite.isChecked = item.favorite
                 binding.ivFavorite.setOnCheckedChangeListener { buttonView, isChecked ->
-                    if(isChecked) buttonView.isEnabled = false
+                    if (isChecked) buttonView.isEnabled = false
                 }
         }
     }

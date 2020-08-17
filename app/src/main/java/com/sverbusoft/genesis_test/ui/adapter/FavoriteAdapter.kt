@@ -48,7 +48,6 @@ class FavoriteAdapter(private val listener: ItemClickListener) :
             binding.apply {
                 clickListener = listener
                 model = item
-                //Picasso.get().load(item.avatarUrl).into(ciUserPhoto)
             }
         }
     }

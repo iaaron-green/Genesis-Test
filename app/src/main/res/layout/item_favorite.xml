@@ -16,31 +16,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ci_user_photo"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tv_repos_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.full_name}"
+            android:text="@{model.name}"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:ellipsize="end"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_delete"
+            app:layout_constraintEnd_toStartOf="@+id/iv_delete"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/ci_user_photo"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
-            tools:text="Aaron Green" />
+            tools:text="Name: Aaron Green" />
+
+        <TextView
+            android:id="@+id/tv_repos_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{model.url}"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repos_name"
+            tools:text="Url" />
 
         <ImageView
             android:id="@+id/iv_delete"
