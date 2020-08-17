@@ -52,6 +52,7 @@ class ReposAdapter(private val listener: ItemClickListener) :
                 model = item
             }
                 binding.ivFavorite.isChecked = item.favorite
+                binding.ivFavorite.isEnabled = !item.favorite
                 binding.ivFavorite.setOnCheckedChangeListener { buttonView, isChecked ->
                     if (isChecked) buttonView.isEnabled = false
                 }
