@@ -6,17 +6,19 @@ import androidx.paging.PagedList
 import com.sverbusoft.genesis_test.data.features.repos.datasource.local.ReposDao
 import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import io.reactivex.disposables.CompositeDisposable
 
 class ReposPageDataSourceFactory(
     private val remoteDataSource: ReposRemoteDataSource,
     private val localDataSource: ReposDao,
-    internal var name: String
+    internal var name: String,
+    private val compositeDisposable: CompositeDisposable
 ) : DataSource.Factory<Int, ReposModel>() {
 
     val usersDataSourceLiveData = MutableLiveData<ReposPageDataSource>()
 
     override fun create(): DataSource<Int, ReposModel> {
-        val source = ReposPageDataSource(remoteDataSource, localDataSource, name)
+        val source = ReposPageDataSource(remoteDataSource, localDataSource, name, compositeDisposable)
         usersDataSourceLiveData.postValue(source)
         return source
     }

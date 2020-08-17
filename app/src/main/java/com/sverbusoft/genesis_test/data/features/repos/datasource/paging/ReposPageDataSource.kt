@@ -8,13 +8,14 @@ import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposDtoToDomainMa
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.util.*
 
 class ReposPageDataSource(
     private val remoteDataSource: ReposRemoteDataSource,
     private val localDataSource: ReposDao,
-    var name: String
+    var name: String,
+    private val compositeDisposable: CompositeDisposable
 ) : PageKeyedDataSource<Int, ReposModel>() {
     override fun loadInitial(
         params: LoadInitialParams<Int>,
@@ -56,17 +57,17 @@ class ReposPageDataSource(
             callback(listOf())
             return
         }
-        var disposable = Single.concat(
+        val disposable = Single.concat(
             remoteDataSource.getRepos(name, page, pageSize),
             remoteDataSource.getRepos(name, page + 1, pageSize)
         )
             .map { ReposDtoToDomainMapper().mapFromObjects(it) }
             .map { t ->
-                    t.forEach { s: ReposModel ->
-                        run {
-                            if (localDataSource.getFavoriteRepos(s.id) != null) s.favorite = true
-                        }
+                t.forEach { s: ReposModel ->
+                    run {
+                        if (localDataSource.getFavoriteRepos(s.id) != null) s.favorite = true
                     }
+                }
                     return@map t
             }
             .subscribeOn(Schedulers.io())
@@ -78,5 +79,6 @@ class ReposPageDataSource(
                 it.printStackTrace()
             })
 
+        compositeDisposable.add(disposable)
     }
 }

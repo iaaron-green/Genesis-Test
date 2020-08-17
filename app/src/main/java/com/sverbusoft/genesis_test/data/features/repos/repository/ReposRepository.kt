@@ -15,10 +15,11 @@ import com.sverbusoft.genesis_test.data.features.repos.datasource.paging.ReposPa
 import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
 import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposModelToEntityMapper
 import com.sverbusoft.genesis_test.data.features.repos.model.ReposModel
+import io.reactivex.disposables.CompositeDisposable
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ReposRepository {
+class ReposRepository(private val compositeDisposable: CompositeDisposable) {
     private var remoteDataSource: ReposRemoteDataSource
     private var localDataSource: ReposDao
     private var dataSourceFactory: ReposPageDataSourceFactory
@@ -41,7 +42,7 @@ class ReposRepository {
 
         localDataSource = AppDatabase.getInstance()!!.reposDao()
 
-        dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource, localDataSource,"")
+        dataSourceFactory = ReposPageDataSourceFactory(remoteDataSource, localDataSource,"", compositeDisposable)
     }
 
     fun searchRepos(name: String) {
