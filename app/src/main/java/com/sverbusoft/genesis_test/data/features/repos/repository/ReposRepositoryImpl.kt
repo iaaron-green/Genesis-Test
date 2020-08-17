@@ -20,7 +20,7 @@ import io.reactivex.disposables.CompositeDisposable
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ReposRepositoryImpl(private val compositeDisposable: CompositeDisposable): ReposRepository {
+class ReposRepositoryImpl(compositeDisposable: CompositeDisposable): ReposRepository {
     private var remoteDataSource: ReposRemoteDataSource
     private var localDataSource: ReposDao
     private var dataSourceFactory: ReposPageDataSourceFactory
