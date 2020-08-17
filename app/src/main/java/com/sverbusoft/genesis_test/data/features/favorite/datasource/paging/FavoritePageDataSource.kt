@@ -15,40 +15,32 @@ class FavoritePageDataSource(
         params: LoadRangeParams,
         callback: LoadRangeCallback<ReposModel>
     ) {
-        val result = ReposModelToEntityMapper().mapFromObjects(
-            dataSource.getFavoriteRepos(
-                params.startPosition,
-                params.loadSize,
-                "%$name%"
-            )
-        )
-        callback.onResult(result)
+        fetchData(params.startPosition, params.loadSize){
+            callback.onResult(it)
+        }
     }
 
     override fun loadInitial(
         params: LoadInitialParams,
         callback: LoadInitialCallback<ReposModel>
     ) {
-        val result = ReposModelToEntityMapper().mapFromObjects(
-            dataSource.getFavoriteRepos(
-                params.requestedStartPosition,
-                params.requestedLoadSize,
-                "%$name%"
-            )
-        )
-        callback.onResult(result, 0)
+        fetchData(params.requestedStartPosition, params.requestedLoadSize){
+            callback.onResult(it, 0)
+        }
     }
 
     private fun fetchData(
-        name: String,
         start: Int,
         size: Int,
-        callback: (List<ReposResponseItem>) -> Unit
+        callback: (List<ReposModel>) -> Unit
     ) {
-        if (name.isEmpty()) {
-            callback(listOf())
-            return
-        }
-
+        val result = ReposModelToEntityMapper().mapFromObjects(
+            dataSource.getFavoriteRepos(
+                start,
+                size,
+                "%$name%"
+            )
+        )
+        callback(result)
     }
 }

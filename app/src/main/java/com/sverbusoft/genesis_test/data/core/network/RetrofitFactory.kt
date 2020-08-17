@@ -6,7 +6,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 
 object RetrofitFactory {
-    @Suppress("LongParameterList", "LongMethod")
+
     fun create(
         okHttpClient: OkHttpClient,
         callAdapterFactory: CallAdapter.Factory,

@@ -14,7 +14,6 @@ object OkHttpFactory {
     private const val WRITE_TIMEOUT: Long =
         DEFAULT_TIME_OUT
 
-    @Suppress("LongMethod")
     fun create(): OkHttpClient =
         OkHttpClient().newBuilder()
             .apply {
