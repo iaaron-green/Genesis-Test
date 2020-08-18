@@ -9,10 +9,10 @@ class App: Application() {
     }
 
     companion object {
-        var instance: App? = null
+        lateinit var instance: App
 
         fun getContext(): Context {
-            return instance!!.applicationContext
+            return instance.applicationContext
         }
     }
 
