@@ -24,7 +24,7 @@ class ReposPageDataSourceFactory(
     }
 
     companion object {
-        private const val PAGE_SIZE = 15
+        private const val PAGE_SIZE = 30
 
         fun pagedListConfig() = PagedList.Config.Builder()
             .setInitialLoadSizeHint(PAGE_SIZE)
@@ -34,6 +34,7 @@ class ReposPageDataSourceFactory(
     }
 
     fun refresh() {
+        compositeDisposable.clear()
         usersDataSourceLiveData.value?.invalidate()
     }
 }

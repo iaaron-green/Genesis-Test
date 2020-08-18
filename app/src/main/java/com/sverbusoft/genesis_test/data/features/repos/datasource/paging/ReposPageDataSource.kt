@@ -6,8 +6,6 @@ import com.sverbusoft.genesis_test.data.features.repos.datasource.local.ReposDao
 import com.sverbusoft.genesis_test.data.features.repos.datasource.remote.ReposRemoteDataSource
 import com.sverbusoft.genesis_test.data.features.repos.mapper.ReposDtoToDomainMapper
 import com.sverbusoft.genesis_test.domain.repos.model.ReposModel
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
@@ -57,10 +55,13 @@ class ReposPageDataSource(
             callback(listOf())
             return
         }
-        val disposable = Single.concat(
-            remoteDataSource.getRepos(name, page, pageSize),
-            remoteDataSource.getRepos(name, page + 1, pageSize)
-        )
+
+        var temp = mutableListOf<ReposModel>()
+        var firstResult: Boolean = false;
+        var secondResult: Boolean = false;
+
+        var resultFirstDisposable = remoteDataSource.getRepos(name, page, pageSize / 2)
+            .subscribeOn(Schedulers.io())
             .map { ReposDtoToDomainMapper().mapFromObjects(it) }
             .map { t ->
                 t.forEach { s: ReposModel ->
@@ -68,17 +69,53 @@ class ReposPageDataSource(
                         if (localDataSource.getFavoriteRepos(s.id) != null) s.favorite = true
                     }
                 }
-                    return@map t
+                return@map t
             }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-
-                callback(it)
+                firstResult = true;
+                if (secondResult) {
+                    callback(mutableListOf<ReposModel>().apply {
+                        addAll(it)
+                        addAll(temp);
+                    })
+                    temp.clear()
+                } else {
+                    temp = mutableListOf<ReposModel>().apply {
+                        addAll(it);
+                    }
+                }
             }, {
                 it.printStackTrace()
             })
 
-        compositeDisposable.add(disposable)
+        var resultSecondDisposable = remoteDataSource.getRepos(name, page + 1, pageSize / 2)
+            .subscribeOn(Schedulers.io())
+            .map { ReposDtoToDomainMapper().mapFromObjects(it) }
+            .map { t ->
+                t.forEach { s: ReposModel ->
+                    run {
+                        if (localDataSource.getFavoriteRepos(s.id) != null) s.favorite = true
+                    }
+                }
+                return@map t
+            }
+            .subscribe({
+                secondResult = true;
+
+                if (firstResult) {
+                    callback(mutableListOf<ReposModel>().apply {
+                        addAll(temp)
+                        addAll(it);
+                    })
+                    temp.clear()
+                } else {
+                    temp = mutableListOf<ReposModel>().apply {
+                        addAll(it);
+                    }
+                }
+            }, { it.printStackTrace() })
+
+        compositeDisposable.add(resultFirstDisposable)
+        compositeDisposable.add(resultSecondDisposable)
     }
 }
