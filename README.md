@@ -1,7 +1,7 @@
 # Genesis-Test
-Test Assigment for Genesis company.
+Test Assignment for Genesis company.
 This project for search of repositories which located on GitHub using github api.
-Used tehnologiies: 
+Used technologies: 
 1) Language: Kotlin
 2) Architecture: MVVM
 3) Retrofit and Rxjava for Rest Api, Room for store data, LiveData for pagination
